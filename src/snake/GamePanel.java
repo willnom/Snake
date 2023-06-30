@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private boolean running;
     public static final byte FPS = 10;
-    private int scale = 2;
+    private int scale = 1;
     private int _width = 450, _height = 450;
     private byte fps;
     public final Snake snake;
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
         color = new Color(255, 255, 255, 80);
         snake = new Snake(this);
         worm = new Worm(this, snake);
-        font =  new Font("Arial", Font.ITALIC, 50 * scale);
+        font = new Font("Arial", Font.ITALIC, 50 * scale);
         fontFPS = new Font(font.getFontName(), Font.BOLD, 15 * scale);
         //screenDbg = new DebugScreen(this, snake);
         addKeyListener(new KeyInputs(snake, worm));
@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
     private void update() {
         snake.update();
         worm.update();
-        
+
     }
 
     private void checkScale() {
@@ -86,13 +86,12 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         worm.draw(g);
         snake.draw(g);
         drawFps(g);
         drawGameOverScreen(g);
-        
-        
+
         if (screenDbg != null) {
             screenDbg.drawScreen(g);
         }
@@ -120,16 +119,22 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void drawGameOverScreen(Graphics g) {
         if (gameOver) {
-            int xy = 100 * scale;
-            int width_height = getWidth() - 2 * xy;
-            g.setColor(color);
-            g.fillRect(xy, xy, width_height, width_height);
-            g.setColor(Color.white);
-            g.drawRect(xy, xy, width_height, width_height);
-            g.setFont(font);
-            g.setColor(Color.black);
-            g.drawString("you lose!", 120 * scale, 200 * scale);
-            g.drawString("score: " + worm.points, 120 * scale, 300 * scale);
+            drawAbstractScreen(g, "You lose!", "score: " + Integer.toString(worm.points));
+        }else if(snake.win){
+            drawAbstractScreen(g, "You Won!", "");
         }
+    }
+
+    public void drawAbstractScreen(Graphics g, String msg1, String msg2) {
+        int xy = 100 * scale;
+        int width_height = getWidth() - 2 * xy;
+        g.setColor(color);
+        g.fillRect(xy, xy, width_height, width_height);
+        g.setColor(Color.white);
+        g.drawRect(xy, xy, width_height, width_height);
+        g.setFont(font);
+        g.setColor(Color.black);
+        g.drawString(msg1, 120 * scale, 200 * scale);
+        g.drawString(msg2, 120 * scale, 300 * scale);
     }
 }

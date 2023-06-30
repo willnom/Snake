@@ -40,11 +40,13 @@ public class KeyInputs extends KeyAdapter {
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && r == 4) {
             changeKeyValues(1, 2, 0, 4, false, false, false, true);
         }
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && snake.panel.gameOver) {
-            changeKeyValues(1, 2, 3, 4, false, false, false, false);
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && (snake.panel.gameOver || snake.win)) {
+            changeKeyValues(1, 2, 3, 4, false, false, false, false);         
             snake.panel.gameOver = false;
+            snake.win = false;
             snake.restartGame();
-            worm.restartGame();
+            worm.restartGame();       
         }        
     }
+    
 }

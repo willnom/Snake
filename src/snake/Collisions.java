@@ -5,10 +5,14 @@ import java.awt.Rectangle;
 public class Collisions {
 
     public static void updateCollision(Snake snake, Worm worm) {
-        if (snake.getHitbox().intersects(worm.getHitbox())) {
-            worm.spawnCoordinates();
+        if (snake.getHitbox().intersects(worm.getHitbox()) && !snake.win) { 
             snake.setCollision(true);
             worm.points++;
+            if (worm.points == 30) {
+               snake.win = true;
+            }else{
+              worm.spawnCoordinates();  
+            }
         }
     }
 
