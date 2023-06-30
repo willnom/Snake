@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final Worm worm;
     private DebugScreen screenDbg;
     public boolean gameOver;
+    public boolean win;
     public final Color color;
     public final Font font;
     public final Font fontFPS;
@@ -120,7 +121,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void drawGameOverScreen(Graphics g) {
         if (gameOver) {
             drawAbstractScreen(g, "You lose!", "score: " + Integer.toString(worm.points));
-        }else if(snake.win){
+        }else if(win){
             drawAbstractScreen(g, "You Won!", "");
         }
     }
