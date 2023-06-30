@@ -21,8 +21,8 @@ public class Worm extends Entity {
         super.width *= panel.getScale();
         super.height *= panel.getScale();
         hitbox = new Rectangle(x, y, super.width, super.height);
-        random = new Random();      
-        spawnCoordinates(); 
+        random = new Random();
+        spawnCoordinates();
     }
 
     @Override
@@ -44,9 +44,15 @@ public class Worm extends Entity {
 
     @Override
     public void spawnCoordinates() {
-                
+
         int boundX = super.boundX(panel);
         int boundY = super.boundY(panel);
+
+        if (panel.gameOver || panel.win) {
+            points = 0;
+            super.x = random.nextInt(boundX) * super.width;
+            super.y = random.nextInt(boundY) * super.height;            
+        }
 
         if (snake.x == super.x) {
             super.x = random.nextInt(boundX) * super.width;
@@ -54,28 +60,8 @@ public class Worm extends Entity {
         if (snake.y == super.y) {
             super.y = random.nextInt(boundY) * super.height;
         }
-        
+
         hitbox.x = super.x;
         hitbox.y = super.y;
     }
-
-    @Override
-    public void restartGame() {
-        int boundX = super.boundX(panel);
-        int boundY = super.boundY(panel);
-        super.x = random.nextInt(boundX) * super.width;
-        super.y = random.nextInt(boundY) * super.height;
-        
-        if (snake.x == super.x) {
-            super.x = random.nextInt(boundX) * super.width;
-        }
-        if (snake.y == super.y) {
-            super.y = random.nextInt(boundY) * super.height;
-        }
-        hitbox.x = super.x;
-        hitbox.y = super.y;
-        
-        points = 0;
-    }
-
 }

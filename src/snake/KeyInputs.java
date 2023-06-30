@@ -41,11 +41,12 @@ public class KeyInputs extends KeyAdapter {
             changeKeyValues(1, 2, 0, 4, false, false, false, true);
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER && (snake.panel.gameOver || snake.panel.win)) {
-            changeKeyValues(1, 2, 3, 4, false, false, false, false);         
+            changeKeyValues(1, 2, 3, 4, false, false, false, false);    
+            snake.restartGame();
+            worm.spawnCoordinates();
             snake.panel.gameOver = false;
             snake.panel.win = false;
-            snake.restartGame();
-            worm.restartGame();       
+            snake.panel.start = true;       
         }        
     }
     

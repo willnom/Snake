@@ -16,7 +16,7 @@ public abstract class Entity {
     public abstract void draw(Graphics g);
     public abstract void update();
     public abstract void spawnCoordinates();
-    public abstract void restartGame();
+    
     
     public int boundX(GamePanel panel){
         return (panel.getWidth() - (width * panel.getScale())) / (width * panel.getScale());

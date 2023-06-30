@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private boolean running;
     public static final byte FPS = 10;
-    private int scale = 1;
+    private int scale = 2;
     private int _width = 450, _height = 450;
     private byte fps;
     public final Snake snake;
@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements Runnable {
     private DebugScreen screenDbg;
     public boolean gameOver;
     public boolean win;
+    public boolean start;
     public final Color color;
     public final Font font;
     public final Font fontFPS;
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
         //screenDbg = new DebugScreen(this, snake);
         addKeyListener(new KeyInputs(snake, worm));
         setFocusable(true);
+        start = true;
     }
 
     @Override
@@ -123,11 +125,13 @@ public class GamePanel extends JPanel implements Runnable {
             drawAbstractScreen(g, "You lose!", "score: " + Integer.toString(worm.points));
         }else if(win){
             drawAbstractScreen(g, "You Won!", "");
+        }else if(start){
+            drawAbstractScreen(g, "press any", "arrow to start");
         }
     }
 
     public void drawAbstractScreen(Graphics g, String msg1, String msg2) {
-        int xy = 100 * scale;
+        int xy = 50 * scale;
         int width_height = getWidth() - 2 * xy;
         g.setColor(color);
         g.fillRect(xy, xy, width_height, width_height);
@@ -135,7 +139,7 @@ public class GamePanel extends JPanel implements Runnable {
         g.drawRect(xy, xy, width_height, width_height);
         g.setFont(font);
         g.setColor(Color.black);
-        g.drawString(msg1, 120 * scale, 200 * scale);
-        g.drawString(msg2, 120 * scale, 300 * scale);
+        g.drawString(msg1, 110 * scale, 200 * scale);
+        g.drawString(msg2, 80 * scale, 300 * scale);
     }
 }
