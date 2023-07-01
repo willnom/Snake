@@ -10,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private boolean running;
     public static final byte FPS = 10;
-    private int scale = 2;
+    private int scale = 1;
     private int _width = 450, _height = 450;
     private byte fps;
     public final Snake snake;

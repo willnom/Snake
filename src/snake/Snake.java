@@ -19,7 +19,7 @@ public class Snake extends Entity {
     public final List<Rectangle> bodyParts;
     private boolean collision;
     private boolean selfCollision;
- 
+
     public Snake(GamePanel panel) {
         this.panel = panel;
         this.scale = panel.getScale();
@@ -37,6 +37,13 @@ public class Snake extends Entity {
 
     @Override
     public void spawnCoordinates() {
+        if (panel.gameOver || panel.win) {
+            hitboxes.clear();
+            bodyParts.clear();
+            selfCollision = false;
+            collision = false;
+        }
+
         int boundX = super.boundX(panel);
         int boundY = super.boundY(panel);
 
@@ -70,13 +77,13 @@ public class Snake extends Entity {
             if (up) {
                 hitbox.y -= speed;
             }
-            if (down) {
+            else if (down) {
                 hitbox.y += speed;
             }
-            if (left) {
+            else if (left) {
                 hitbox.x -= speed;
             }
-            if (right) {
+            else if (right) {
                 hitbox.x += speed;
             }
         }
@@ -97,15 +104,7 @@ public class Snake extends Entity {
             }
         }
     }
-
-    public void restartGame() {
-        spawnCoordinates();
-        hitboxes.clear();
-        bodyParts.clear();
-        selfCollision = false;
-        collision = false;
-    }
-
+    
     public void checkBoundaries() {
         if (hitbox.x + hitbox.width > panel.getWidth()) {
             hitbox.x = 0;

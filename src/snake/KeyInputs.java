@@ -42,7 +42,7 @@ public class KeyInputs extends KeyAdapter {
         }
         if (e.getKeyCode() == KeyEvent.VK_ENTER && (snake.panel.gameOver || snake.panel.win)) {
             changeKeyValues(1, 2, 3, 4, false, false, false, false);    
-            snake.restartGame();
+            snake.spawnCoordinates();
             worm.spawnCoordinates();
             snake.panel.gameOver = false;
             snake.panel.win = false;
